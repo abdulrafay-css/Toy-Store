@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Bounceloft — The Night-Playroom Toy Co.</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<canvas id="webgl"></canvas>
+<div class="noise-veil"></div>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="logo"><span class="dot"></span>Bounceloft</div>
+  <div class="top-actions">
+    <button class="icon-btn" id="wishlistBtn" aria-label="Wishlist">♡<span class="badge" id="wishBadge" style="display:none">0</span></button>
+    <button class="icon-btn" id="cartBtn" aria-label="Open cart">🛒<span class="badge" id="cartBadge" style="display:none">0</span></button>
+  </div>
+</div>
+
+<!-- Home view -->
+<div class="view" id="view-home">
+  <div class="inner">
+    <p class="eyebrow">A Playroom That Glows After Dark</p>
+    <h1 class="hero-title">Toys built for<br>midnight <span class="accent">wonder.</span></h1>
+    <p class="hero-sub">Squeeze, spin and stack your way through a shelf of glowing companions — every one hand-tuned for tiny hands and big imaginations.</p>
+    <div class="cta-row">
+      <button class="btn btn-primary" id="goShopBtn">Visit the Shelf</button>
+      <button class="btn btn-ghost" id="openQuizBtn">✨ Find the Right Gift</button>
+    </div>
+  </div>
+</div>
+<div class="scroll-hint" id="scrollHint"><span>Scroll</span><span class="stick"></span></div>
+
+<!-- Shop view -->
+<div class="view" id="view-shop">
+  <div class="inner">
+    <div class="shop-header">
+      <div class="shop-title">The Shelf</div>
+      <div class="filters" id="ageFilters">
+        <button class="chip active" data-age="all">All ages</button>
+        <button class="chip" data-age="0-3">0–3</button>
+        <button class="chip" data-age="4-7">4–7</button>
+        <button class="chip" data-age="8-12">8–12+</button>
+      </div>
+      <div class="search-wrap">
+        <span>🔍</span>
+        <input type="text" id="searchInput" placeholder="Search toys…" />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="toy-caption" id="toyCaption">
+  <div class="name" id="capName"></div>
+  <div class="price" id="capPrice"></div>
+</div>
+
+<!-- Detail view -->
+<div id="view-detail">
+  <button class="btn btn-ghost back-btn" id="backBtn">← Back to Shelf</button>
+  <div class="detail-card">
+    <span class="detail-age" id="detAge">0–3</span>
+    <h2 class="detail-name" id="detName">Toy Name</h2>
+    <p class="detail-desc" id="detDesc">Description</p>
+    <div class="detail-price" id="detPrice">$0</div>
+    <div class="detail-actions">
+      <button class="btn btn-primary" id="addToCartBtn" style="flex:1">Add to Cart</button>
+      <button class="btn btn-ghost btn-icon-only" id="wishToggleBtn" aria-label="Add to wishlist">♡</button>
+    </div>
+  </div>
+  <div class="drag-hint">↔ Drag to spin the toy</div>
+</div>
+
+<!-- Bottom dock -->
+<div class="dock" id="dock">
+  <button class="dock-item active" data-view="home">Home<div class="dock-pill" style="display:none"></div></button>
+  <button class="dock-item" data-view="shop">Shop<div class="dock-pill" style="display:none"></div></button>
+</div>
+
+<!-- Cart -->
+<div class="cart-scrim" id="cartScrim"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-head"><h2>Your Cart</h2><button class="cart-close" id="cartCloseBtn">✕</button></div>
+  <div class="cart-items" id="cartItems"><div class="cart-empty">Your shelf is empty — go bounce around the shop!</div></div>
+  <div class="cart-foot">
+    <div id="bundleSlot"></div>
+    <div class="cart-total"><span>Total</span><span id="cartTotal">$0</span></div>
+    <button class="btn btn-primary" style="width:100%">Checkout</button>
+  </div>
+</div>
+
+<!-- Gift quiz -->
+<div class="modal-scrim" id="quizScrim">
+  <div class="quiz-card">
+    <button class="quiz-close" id="quizCloseBtn">✕</button>
+    <div id="quizBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
